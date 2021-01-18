@@ -1,0 +1,4 @@
+int main(){
+    print("cavalo");
+    return 0;
+}
