@@ -15,6 +15,7 @@ class Program:
         self.file_content = ""
         self.file_recents = []
         self.file_recents_num = []
+        self.recentlist_status = 1
 
 
     def list_files(self):        
@@ -49,6 +50,13 @@ class Program:
         else:
             self.file_recents.insert(0,name)
             self.file_recents_num.insert(0,num)
+
+    def blockRecentlist(self):
+        self.recentlist_status = 0
+
+    def freeRecentlist(self):
+        self.recentlist_status = 1
+    
 
 
 
@@ -117,4 +125,38 @@ class Teste:
 
         expected = [5,6]
         assert out == expected
+
+
+    
+
+    def test_recentList_add_c(self):
+        #teste para verifciar o limite do tamanho da fila e sua ciclicidade
+        program =Program(files_directory)
+        program.list_files()
+        program.open_file(5)
+        program.open_file(1)
+        program.open_file(2)
+        program.open_file(3)
+        program.open_file(4)
+        program.open_file(5)
+        program.open_file(6)
+        program.open_file(7)
+        program.open_file(8)
+        program.open_file(9)
+        program.open_file(10)
+        program.blockRecentlist()
+        program.open_file(11)
+        program.open_file(12)
+        program.open_file(13)
+        program.open_file(14)
+        program.open_file(15)
+        program.freeRecentList()
+        program.open_file(16)
+        program.open_file(17)
+
+        out = program.recentList_num()        
+        expected = [17,16,10,9,8,7,6,5,4,3]
+        assert expected == out
+        
+
 
