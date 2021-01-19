@@ -15,10 +15,12 @@ class Program:
         self.file_content = ""
 
     def list_files(self):        
+        #refactory ok
         self.onlyfiles = [f for f in listdir(self.directory) if isfile(join(self.directory, f))]
         return (self.onlyfiles)
     
     def open_file(self,numFile):
+        #no refactory nedeed
         self.selectFile = numFile
         f = open(self.directory+self.onlyfiles[self.selectFile], "r")
         self.file_content = f.read()
