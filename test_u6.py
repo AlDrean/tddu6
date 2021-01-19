@@ -52,9 +52,11 @@ class Program:
             self.file_recents_num.insert(0,num)
 
     def blockRecentlist(self):
+        
         self.recentlist_status = 0
 
     def freeRecentlist(self):
+
         self.recentlist_status = 1
     
 
