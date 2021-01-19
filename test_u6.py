@@ -11,9 +11,9 @@ class Program:
     def __init__(self, directory):
         self.directory = directory
 
-    def list_files(self):
-        onlyfiles =""
-        print (onlyfiles)
+    def list_files(self):        
+        onlyfiles = [f for f in listdir(self.directory) if isfile(join(self.directory, f))]
+        print(*onlyfiles, sep = "\n") 
         
         return onlyfiles
 
