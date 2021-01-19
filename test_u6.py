@@ -26,6 +26,7 @@ class Program:
         #no refactory nedeed
         self.selectFile = numFile
         f = open(self.directory+self.onlyfiles[self.selectFile], "r")
+        self.recentList_add(self.selectFile,self.onlyfiles[self.selectFile])
         self.file_content = f.read()
         f.close()
 
@@ -44,18 +45,18 @@ class Program:
             self.file_recents.insert(0,name)
 
             self.file_recents_num.remove(num)
-            self.file_recents_num.insert(0,name)
+            self.file_recents_num.insert(0,num)
         else:
             self.file_recents.insert(0,name)
             self.file_recents_num.insert(0,num)
 
 
 
+
+
 files_directory = 'files/'
 
-
 class Teste:
-
     def test_listFiles(self,capsys):
         program =Program(files_directory)
         program.list_files()
@@ -93,8 +94,9 @@ class Teste:
         assert out == expected
 
     def test_recentList_add_a(self):
-        #esperada saida dos noems dos arquivos com o primeiro primeiro sendo o 5;
+        #esperada saida dos noems dos arquivos com o primeiro primeiro sendo o 6;
         program =Program(files_directory)
+        program.list_files()
         program.open_file(5)
         program.open_file(6)
 
@@ -104,7 +106,9 @@ class Teste:
     
     def test_recentList_add_b(self):
         #esperada saida dos noems dos arquivos com o primeiro primeiro sendo o 5;
+        #teste de acesso sucessivo de um arquivo
         program =Program(files_directory)
+        program.list_files()
         program.open_file(5)
         program.open_file(6)
         program.open_file(5)
@@ -113,5 +117,4 @@ class Teste:
 
         expected = [5,6]
         assert out == expected
-
 
