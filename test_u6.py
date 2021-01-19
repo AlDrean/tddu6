@@ -13,6 +13,8 @@ class Program:
         self.onlyfiles = ""
         self.selectFile = -1
         self.file_content = ""
+        self.file_recents = []
+
 
     def list_files(self):        
         #refactory ok
@@ -28,19 +30,24 @@ class Program:
         return self.file_content
     
 
+    def recentList(self):
+        return self.file_recents
+
+    def recentList_add(self):
+        pass
+
 
 
 
 files_directory = 'files/'
 
-program =Program(files_directory)
-program.list_files()
-program.open_file(5)
-testCase = ''
 
 class Teste:
 
     def test_listFiles(self,capsys):
+        program =Program(files_directory)
+        program.list_files()
+
         f = open ("tests/list_file.out","r")
         expect = (f.read())
 
@@ -53,6 +60,10 @@ class Teste:
 
 
     def test_openFile(self,capsys):
+        program =Program(files_directory)
+        program.list_files()
+
+        program.open_file(5)
         f = open ("tests/open_file.out","r")
         expect = (f.read())
         
@@ -61,4 +72,11 @@ class Teste:
         
         assert out == expect
 
+    def test_recentListEmpty(self,capsys):
+        program =Program(files_directory)
+        program.list_files()
+        out = program.recentList()
+        expected = []
+
+        assert out == expected
 
