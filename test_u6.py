@@ -65,8 +65,8 @@ class Program:
         self.recentlist_status = 1
 
     def droprecent(self):
-        pass
-    
+        self.file_recents = []
+        self.file_recents_num = []
 
 
 
