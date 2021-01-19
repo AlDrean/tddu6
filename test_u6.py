@@ -9,6 +9,7 @@ import pytest
 class Program:
 
     def __init__(self, directory):
+        self.recentlist_limit = 10
         self.directory = directory
         self.onlyfiles = ""
         self.selectFile = -1
@@ -41,22 +42,26 @@ class Program:
         return self.file_recents_num
     
     def recentList_add(self,num,name):
-        if name in self.file_recents:
-            self.file_recents.remove(name)
-            self.file_recents.insert(0,name)
-
-            self.file_recents_num.remove(num)
-            self.file_recents_num.insert(0,num)
+        if self.recentlist_status == 0:
+            pass
         else:
-            self.file_recents.insert(0,name)
-            self.file_recents_num.insert(0,num)
+            if len(self.file_recents) >= self.recentlist_limit:
+                self.file_recents=self.file_recents[:-1]
+                self.file_recents_num=self.file_recents_num[:-1]
+            if name in self.file_recents:
+                self.file_recents.remove(name)
+                self.file_recents.insert(0,name)
+
+                self.file_recents_num.remove(num)
+                self.file_recents_num.insert(0,num)
+            else:
+                self.file_recents.insert(0,name)
+                self.file_recents_num.insert(0,num)
 
     def blockRecentlist(self):
-        
         self.recentlist_status = 0
 
-    def freeRecentlist(self):
-
+    def freeRecentList(self):
         self.recentlist_status = 1
     
 
@@ -157,8 +162,8 @@ class Teste:
         program.open_file(17)
 
         out = program.recentList_num()        
+
         expected = [17,16,10,9,8,7,6,5,4,3]
         assert expected == out
         
-
 
