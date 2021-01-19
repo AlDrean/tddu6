@@ -63,6 +63,9 @@ class Program:
 
     def freeRecentList(self):
         self.recentlist_status = 1
+
+    def droprecent(self):
+        pass
     
 
 
@@ -164,6 +167,35 @@ class Teste:
         out = program.recentList_num()        
 
         expected = [17,16,10,9,8,7,6,5,4,3]
+        assert expected == out
+
+    def test_destroylist(self):
+        program =Program(files_directory)
+        program.list_files()
+        program.open_file(5)
+        program.open_file(1)
+        program.open_file(2)
+        program.open_file(3)
+        program.open_file(4)
+        program.open_file(5)
+        program.open_file(6)
+        program.open_file(7)
+        program.open_file(8)
+        program.open_file(9)
+        program.open_file(10)
+        program.blockRecentlist()
+        program.open_file(11)
+        program.open_file(12)
+        program.open_file(13)
+        program.open_file(14)
+        program.open_file(15)
+        program.freeRecentList()
+        program.open_file(16)
+        program.open_file(17)
+        program.droprecent()
+        out = program.recentList_num()        
+
+        expected = []
         assert expected == out
         
 
