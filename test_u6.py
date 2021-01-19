@@ -19,8 +19,11 @@ class Program:
         return (self.onlyfiles)
     
     def open_file(self,numFile):
+        self.selectFile = numFile
+        f = open(self.directory+self.onlyfiles[self.selectFile], "r")
+        self.file_content = f.read()
+        f.close()
         return self.file_content
-    
     
 
 
